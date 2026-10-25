@@ -61,9 +61,9 @@ const BASE=330;
 const F=(n,o)=>({t:'F',n,...o}),S=(n,dy,o)=>({t:'S',n,dy,...o}),B=(n,h,o)=>({t:'B',n,h,...o}),P=(n,o)=>({t:'P',n,...o});
 const LEVELS=[
 {name:'Sala de lectura',sub:'Calienta motores',wood:'#8a5a34',top:'#c98f55',bg1:'#2a1f2e',bg2:'#46304a',seg:[
- F(24,{b:1}),S(14,-50,{b:1}),F(8,{b:1,boost:1}),S(16,50,{b:1}),F(10,{e:'dust'}),B(14,60,{b:1}),F(8),P(8,{arc:1}),F(14,{b:1,e:'dust'}),
- S(16,-70,{b:1}),F(10,{b:1}),S(18,90,{b:1,boost:1}),F(14,{b:1}),P(10,{arc:1}),F(12,{e:'fine',b:1}),B(18,80,{b:1}),F(10,{check:1,e:'dust'}),
- S(14,-60,{b:1}),B(12,50),S(14,60,{b:1}),F(8,{boost:1}),F(18,{b:1}),P(12,{arc:1}),F(10,{b:1}),S(16,70,{b:1}),F(12,{e:'dust',b:1}),P(8,{arc:1}),F(14,{e:'fine'}),B(16,70,{b:1}),F(24,{goal:1})]},
+ F(24,{b:1}),S(14,-50,{b:1}),F(8,{b:1,boost:1}),S(16,50,{b:1}),F(10,{e:'dust'}),B(14,60,{b:1}),F(8),P(5,{arc:1}),F(14,{b:1,e:'dust'}),
+ S(16,-70,{b:1}),F(10,{b:1}),S(18,90,{b:1,boost:1}),F(14,{b:1}),P(6,{arc:1}),F(12,{e:'fine',b:1}),B(18,80,{b:1}),F(10,{check:1,e:'dust'}),
+ S(14,-60,{b:1}),B(12,50),S(14,60,{b:1}),F(8,{boost:1}),F(18,{b:1}),P(8,{arc:1}),F(10,{b:1}),S(16,70,{b:1}),F(12,{e:'dust',b:1}),P(6,{arc:1}),F(14,{e:'fine'}),B(16,70,{b:1}),F(24,{goal:1})]},
 {name:'Archivo viejo',sub:'Polvo y estanterías',wood:'#2f5a63',top:'#6bb5b8',bg1:'#12212a',bg2:'#1f3a47',seg:[
  F(18,{b:1}),S(18,-70,{b:1}),F(8,{e:'dust'}),P(10,{arc:1}),F(8,{b:1,boost:1}),S(20,100,{b:1}),F(8,{e:'fine',b:1}),B(14,70,{e:'dust',b:1}),F(8),P(11,{arc:1}),F(8,{b:1}),
  S(18,-80,{b:1}),B(10,50),S(18,-60,{b:1}),F(10,{e:'dust',check:1}),S(20,120,{b:1,boost:1}),F(12,{b:1}),P(12,{arc:1}),F(8,{e:'fine'}),P(10,{arc:1}),F(10,{b:1,e:'dust'}),
@@ -201,13 +201,13 @@ function step(){
   if(p.roll&&(!RO()||Math.abs(p.vx)<1.2))p.roll=false;
   if(p.roll){p.vx+=slope*(slope*p.vx>0?.75:.55);p.vx*=.992;if(dir*p.vx<0)p.vx+=dir*.06;}
   else{
-   const mx=9;
+   const mx=7;
    if(dir){if(dir*p.vx<mx){p.vx+=dir*(dir*p.vx<0?.6:.26);}p.face=dir;}
    else{p.vx*=.93;if(Math.abs(p.vx)<.12)p.vx=0;}
    p.vx+=slope*.32;
    if(Math.abs(p.vx)>mx&&Math.abs(slope)<.08)p.vx*=.972;
   }
-  if(Math.abs(p.vx)>17)p.vx=17*Math.sign(p.vx);
+  if(Math.abs(p.vx)>14)p.vx=14*Math.sign(p.vx);
   if(Math.abs(p.vx)>.5)p.face=p.vx>0?1:-1;
   p.x+=p.vx;if(p.x<10){p.x=10;p.vx=0;}
   const ng=hg(Lv,p.x);
@@ -220,7 +220,7 @@ function step(){
   p.coy--;
   if(p.coy>0&&p.jumpBuf>0&&p.vy>=0){p.vy=JUMP;p.jumpBuf=0;p.coy=0;sfx.jump();p.roll=true;}
   if(dir){p.vx+=dir*.28;p.face=dir;}
-  p.vx*=.995;if(Math.abs(p.vx)>17)p.vx=17*Math.sign(p.vx);
+  p.vx*=.995;if(Math.abs(p.vx)>14)p.vx=14*Math.sign(p.vx);
   if(!JU()&&p.vy<-4.5&&p.inv<100)p.vy=-4.5; // salto variable
   p.vy+=GRAV;if(p.vy>16)p.vy=16;
   const oy=p.y;p.x+=p.vx;p.y+=p.vy;if(p.x<10){p.x=10;p.vx=0;}
@@ -235,7 +235,7 @@ function step(){
  p.ang+=(ta-p.ang)*.25;
  const ball=p.roll;
  // boosts
- for(const b of Lv.boosts){if(p.g&&Math.abs(p.x-b.x)<26&&!b.cd){p.vx=Math.max(Math.abs(p.vx),15)*(p.vx<0?-1:1)||15;if(p.vx===0)p.vx=15;b.cd=40;sfx.boost();st.shake=4;}if(b.cd>0)b.cd--;}
+ for(const b of Lv.boosts){if(p.g&&Math.abs(p.x-b.x)<26&&!b.cd){p.vx=Math.max(Math.abs(p.vx),12)*(p.vx<0?-1:1)||12;if(p.vx===0)p.vx=12;b.cd=40;sfx.boost();st.shake=4;}if(b.cd>0)b.cd--;}
  // libros
  const cy=p.y-30;
  for(const b of Lv.books){if(b.got)continue;const dx=b.x-p.x,dy=b.y-cy;if(dx*dx+dy*dy<34*34){b.got=1;st.books++;st.levelBooks++;sfx.book();for(let i=0;i<5;i++)addPart(b.x,b.y,(Math.random()-.5)*4,(Math.random()-.5)*4,'#ffd166',20,3);
