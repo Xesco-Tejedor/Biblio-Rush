@@ -6,7 +6,7 @@ Juego de plataformas y velocidad ambientado en una biblioteca. Corre, salta y ru
 
 ## Objetivo y niveles
 
-Recorre tres niveles: **Sala de lectura**, **Archivo viejo** y **Hemeroteca nocturna**. Recoge libros, aprovecha los impulsos y evita los fosos, el polvo y las multas. Los puntos de control aparecen como sellos.
+Recorre tres niveles: **Sala de lectura**, **Archivo viejo** y **Hemeroteca nocturna**. Recoge libros, aprovecha los impulsos y evita los fosos, el polvo y las multas. Los puntos de control aparecen como sellos. Al final del Archivo viejo te espera el jefe **BitRot** y en la Hemeroteca nocturna, la **Obsolescencia Programada**: golpéalos saltando sobre ellos o rodando para desbloquear la salida.
 
 Empiezas con tres vidas. Al llegar a la salida se muestra el resultado del nivel y puedes continuar al siguiente. El juego conserva un récord local de libros, no una clasificación online.
 
